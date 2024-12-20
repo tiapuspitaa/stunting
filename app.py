@@ -1,6 +1,5 @@
 import subprocess
 import sys
-import importlib
 
 # Fungsi untuk memastikan library terinstal sebelum mengimpor
 def install_and_import(package):
@@ -24,7 +23,7 @@ import seaborn as sns
 @st.cache_data
 def load_data():
     # Ganti path ini dengan file dataset Anda
-    file_path = "path_to_your_dataset.csv"  # Sesuaikan dengan file Anda
+    file_path = "stunting2.csv"  # Sesuaikan dengan file Anda
     data = pd.read_csv(file_path)
     return data
 
