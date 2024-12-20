@@ -1,28 +1,30 @@
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import subprocess
 import sys
 import importlib
 
-# Fungsi untuk memastikan library terinstal
+# Fungsi untuk memastikan library terinstal sebelum mengimpor
 def install_and_import(package):
     try:
         importlib.import_module(package)
     except ImportError:
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# Pastikan semua library terinstal
+# Pastikan semua library terinstal sebelum diimpor
 required_packages = ["pandas", "matplotlib", "seaborn", "streamlit"]
 for package in required_packages:
     install_and_import(package)
+
+# Impor library setelah instalasi
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Fungsi untuk membaca dan memproses data
 @st.cache_data
 def load_data():
     # Ganti path ini dengan file dataset Anda
-    file_path = "stunting2.csv"  # Sesuaikan dengan file Anda
+    file_path = "path_to_your_dataset.csv"  # Sesuaikan dengan file Anda
     data = pd.read_csv(file_path)
     return data
 
