@@ -1,17 +1,16 @@
 import subprocess
 import sys
 
-# Fungsi untuk memastikan library terinstal sebelum mengimpor
-def install_and_import(package):
+# Fungsi untuk memastikan library terinstal melalui requirements.txt
+def install_requirements():
     try:
-        importlib.import_module(package)
-    except ImportError:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing requirements: {e}")
+        sys.exit(1)
 
 # Pastikan semua library terinstal sebelum diimpor
-required_packages = ["pandas", "matplotlib", "seaborn", "streamlit"]
-for package in required_packages:
-    install_and_import(package)
+install_requirements()
 
 # Impor library setelah instalasi
 import streamlit as st
@@ -23,7 +22,7 @@ import seaborn as sns
 @st.cache_data
 def load_data():
     # Ganti path ini dengan file dataset Anda
-    file_path = "stunting2.csv"  # Sesuaikan dengan file Anda
+    file_path = "path_to_your_dataset.csv"  # Sesuaikan dengan file Anda
     data = pd.read_csv(file_path)
     return data
 
